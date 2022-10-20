@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Lab01</string>
+    <string name="bt1">Button 1</string>
+    <string name="bt2">Button 2</string>
+    <string name="visibleTrue">visibleTrue</string>
+    <string name="visibleFalse">visibleFalse</string>
+</resources>
