@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Lab04</string>
+    <string name="am">오전</string>
+    <string name="repeat">반복</string>
+    <string name="Helium">Helium</string>
+    <string name="vibrate">진동</string>
+    <string name="label">라벨</string>
+
+</resources>
