@@ -31,6 +31,27 @@
     String data1 = activityPreferences.getString("data1", "none");
     int data2 = activityPreferences.getInt("data2", 0);
 
+
+// 사용 예제
+
+        setButton1.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                SharedPreferences sharedPreferences = getSharedPreferences("test", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                editor.putString("test", "123123123");
+                editor.commit();
+            }
+        });
+
+        getButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences sharedPreferences = getSharedPreferences("test", MODE_PRIVATE);
+                String str = sharedPreferences.getString("test", "");
+            }
+        });
 ```
 
 -   put으로 저장하고 get으로 조회함
