@@ -6,36 +6,57 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
+    private Context myContext;
+
+    Button setButton1, setButton2, getButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        setButton1 = findViewById(R.id.b1);
+        setButton2 = findViewById(R.id.b2);
+        getButton = findViewById(R.id.b3);
+
+        setButton1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences sharedPreferences = getSharedPreferences("test", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit(); //sharedPreferences를 제어할 editor를 선언
+                editor.putString("text", "test data 1"); // key,value 형식으로 저장
+                editor.apply();    //최종 커밋. 커밋을 해야 저장이 된다.}
+            }
+        });
+
+        setButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences sharedPreferences = getSharedPreferences("test", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit(); //sharedPreferences를 제어할 editor를 선언
+                editor.putString("text", "test data 2"); // key,value 형식으로 저장
+                editor.apply();    //최종 커밋. 커밋을 해야 저장이 된다.}
+            }
+        });
+
+        getButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences sharedPreferences= getSharedPreferences("test", MODE_PRIVATE);    // test 이름의 기본모드 설정, 만약 test key값이 있다면 해당 값을 불러옴.
+                String inputText = sharedPreferences.getString("text","1");
+                showToast(inputText);
+            }
+        });
     }
 
-    SharedPreferences activityPreferences = getPreferences(Context.MODE_PRIVATE);
-    // activity의 이름을 파일명으로 사용하며 하나의 액티비티만을 위한 공간으로 사용
-    SharedPreferences contextPreferences = getSharedPreferences("myPrefs", Context.MODE_PRIVATE);
-    // context단위로 앱 내의 다른 액티비티나 컴포넌트가 데이터 공유 가능.
-    SharedPreferences packagePreferences = PreferenceManager.getDefaultSharedPreferences(this);
-    // com.example.test_preferences와 같이 앱의 패키지명을 파일명으로 사용하고 앱 내의 다른 액티비티나 컴포넌트가 데이터 공유 가능.
-
-    // ContextMode는 외부 앱과의 공유 정도에 따라 MODE_PRIVATE,MODE_WORLD_READABLE, MODE_WORLD_WRITEABLE를 가짐.
-
-    SharedPreferences.Editor editor = activityPreferences.edit();
-
-    // Write
-    public SharedPreferences.Editor getEditor() {
-        editor.putString("data1", "information of data1");
-        editor.putInt("data2", 100);
-        editor.commit();
-        // put Boolean,Float, Long 모두 지원
-        return editor;
+    private void showToast(String msg){
+        Toast toast = Toast.makeText(this, "The value is " + msg, Toast.LENGTH_SHORT);
+        toast.show();
     }
-
-    // Read
-    String data1 = activityPreferences.getString("data1", "none");
-    int data2 = activityPreferences.getInt("data2", 0);
 }
