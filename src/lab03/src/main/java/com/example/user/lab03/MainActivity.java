@@ -49,12 +49,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         public void onClick(DialogInterface dialogInterface, int which) {
             if (dialogInterface == cusDig && which == DialogInterface.BUTTON_POSITIVE)
                 showToast("customDig");
-            else if (dialogInterface == listDig){
-                String[] data = getResources().getStringArray(R.array.dialog);
-                showToast(data[which] + "selected");
-            }
-            else if (dialogInterface == alertDig && which == DialogInterface.BUTTON_POSITIVE)
-                showToast("alert");
+//            else if (dialogInterface == listDig){
+//                String[] data = getResources().getStringArray(R.array.dialog);
+//                showToast(data[which] + "selected");
+//            }
+//            else if (dialogInterface == alertDig && which == DialogInterface.BUTTON_POSITIVE)
+//                showToast("alert");
         }
     };
 
@@ -65,7 +65,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             builder.setIcon(R.drawable.ic_launcher_background);
             builder.setTitle("alert");
             builder.setMessage("exit?");
-            builder.setPositiveButton("OK", onClickListener);
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    showToast("alert");
+                }
+            });
             builder.setNegativeButton("NO", null);
 
             alertDig = builder.create();
@@ -74,7 +79,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         else if (view == list){
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("alarm");
-            builder.setSingleChoiceItems(R.array.dialog, 0, onClickListener);
+            builder.setSingleChoiceItems(R.array.dialog, 0, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int which) {
+                    String[] data = getResources().getStringArray(R.array.dialog);
+                    showToast(data[which] + "selected");
+                }
+            });
             builder.setPositiveButton("ok", null);
             builder.setNegativeButton("no", null);
 

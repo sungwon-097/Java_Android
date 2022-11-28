@@ -21,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        SharedPreferences sharedPreferences = getSharedPreferences("test", MODE_PRIVATE); // test 이름의 기본모드 설정, 만약 test key값이 있다면 해당 값을 불러옴.
+
         setButton1 = findViewById(R.id.b1);
         setButton2 = findViewById(R.id.b2);
         getButton = findViewById(R.id.b3);
@@ -28,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
         setButton1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SharedPreferences sharedPreferences = getSharedPreferences("test", MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit(); //sharedPreferences를 제어할 editor를 선언
                 editor.putString("text", "test data 1"); // key,value 형식으로 저장
                 editor.apply();    //최종 커밋. 커밋을 해야 저장이 된다.}
@@ -38,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
         setButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SharedPreferences sharedPreferences = getSharedPreferences("test", MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit(); //sharedPreferences를 제어할 editor를 선언
                 editor.putString("text", "test data 2"); // key,value 형식으로 저장
                 editor.apply();    //최종 커밋. 커밋을 해야 저장이 된다.}
@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
         getButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SharedPreferences sharedPreferences= getSharedPreferences("test", MODE_PRIVATE);    // test 이름의 기본모드 설정, 만약 test key값이 있다면 해당 값을 불러옴.
                 String inputText = sharedPreferences.getString("text","1");
                 showToast(inputText);
             }
