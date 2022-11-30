@@ -82,7 +82,7 @@
 
     android:foreground="@mipmap/ic_launcher" // 아이콘을 모든 자식 뷰보다 앞에 위치시킴
     android:foregroundGravity="center" // 중앙
-    android:measureAllChildren="true"  // visibility에 관계없이 영역을 유지
+    android:measureAllChildren="true"  // Visibility에 관계없이 영역을 유지
 
     tools:context=".MainActivity">
 
